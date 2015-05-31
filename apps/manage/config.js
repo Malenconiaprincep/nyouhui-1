@@ -10,7 +10,7 @@ module.exports = function(app) {
   return {
     port: '9002',
     restful: {
-      host: 'nyouhui.com',
+      host: '127.0.0.1',
       port: 3000,
       defaultDb: 'nyouhui'
     },

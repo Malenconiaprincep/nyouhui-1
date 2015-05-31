@@ -1,0 +1,57 @@
+extends ../../layouts/index
+
+block append title
+
+block append meta
+
+block append stylesheet
+  link(href='/plugins/datatables/dataTables.bootstrap.css', rel='stylesheet', type='text/css')
+
+block append headjs
+
+block append content
+  // Main content
+  section.content
+    form
+      div
+        - var data = result.data[result.db][result.collection];
+        +manage_ctrl_sort({
+            value:data,
+            db:result.db,
+            collection:result.collection
+          })
+      +manage_box({
+          title:result.schema[result.db]['schema']['alias']
+      })
+      .form-group
+        p.btn.btn-primary.btn-schema-add(type="submit") 确定
+        | 
+        a.btn.btn-default.btn-cancel 取消
+  script.
+    var submit = $('[type=submit]');
+    submit.on('click',function(){
+      var data = $('[data-module="manage_ctrl_sort"]').data('view');
+      var ids = data.value();
+      var el = data.$el;
+      var db = el.attr('data-name');
+      var collection = el.attr('data-collection');
+      $.ajax({
+        url:'/api/sort/'+db+'/'+collection,
+        type:'put',
+        params:{
+          ids:ids
+        },
+        success: function(data){
+           if(data.ret_code == 200){
+              alert('提交成功');
+           }
+        }
+      });
+    })
+block append pluginjs
+  // DATA TABES SCRIPT
+  script(src='/plugins/datatables/jquery.dataTables.js')
+  script(src='/plugins/datatables/dataTables.bootstrap.js')
+
+block append footjs
+  script(type="text/javascript",src="//static.nyouhui.com/dist/js/manage/sort.min.0e7150f57da493fd.js")

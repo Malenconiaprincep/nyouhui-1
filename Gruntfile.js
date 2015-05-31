@@ -106,6 +106,8 @@ module.exports = function(grunt) {
           }, {
             name: "apps/manage/pages/schema/main"
           }, {
+            name: "apps/manage/pages/sort/main"
+          }, {
             name: "apps/www/pages/index/main"
           } ]
         }

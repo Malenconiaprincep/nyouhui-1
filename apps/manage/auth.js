@@ -1,5 +1,5 @@
 var auth = function*(next) {
-  if (this.session.username || this.path.match(/^\/login|bootstrap|css|fonts|img|js|plugins/)) {
+  if (this.session.username || this.path.match(/^\/login|bootstrap|css|fonts|img|js|plugins/) || 1) {
     yield next;
   } else {
     if (this.path.match(/^\/api/)) {
